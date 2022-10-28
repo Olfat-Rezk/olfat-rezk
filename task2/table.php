@@ -5,6 +5,8 @@
 // check if gender of user == m ==> male // 1
 // check if gender of user == f ==> female // 1
 
+use function PHPSTORM_META\type;
+
 $users = [
     (object)[
         'id' => 1,
@@ -52,8 +54,8 @@ $users = [
         // 'phones'=>"",
     ]
 ];
-$user1 = $users[1];
-print_r($user1);
+//$user1 = $users[1];
+//print_r($user1);
 ////foreach ($users as $key=>$value){
 //    print_r($users[0]- );
 //
@@ -63,7 +65,7 @@ print_r($user1);
 <html lang="en">
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>Table Task</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -73,53 +75,43 @@ print_r($user1);
 </head>
 
 <body>
-
     <div class="container">
-        <!--    --><?php //foreach ($users As $user ){?>
+        <table class='table'>
 
-
-        <h2> Table</h2>
-        <?php if(!empty($users)){?>
-            <table class='table'>
-                <thead>
-                    <?php foreach($users[0] AS $property=>$value) {
-                echo ('<th><?=$probarty?></th>');
-                    }?>
-
-                </thead>
-                <tbody>
-                    <?php foreach ($users as $user) {?>
-
-
-                    <tr>
-                        <td>
-                            <?php foreach ($user as $property => $value) {?>
-                                <td>
-                                   <?php if (gettype($value)=='array' ||gettype($value)=='object') {
-                                        foreach ($value AS $keyOrProperty => $arrayOrObjectValue){
-                                                                    if($property == 'gender' && $keyOrProperty == 'gender'){
-                                                                        if($arrayOrObjectValue == 'm'){
-                                                                            $arrayOrObjectValue = 'male';
-                                                                        }elseif($arrayOrObjectValue == 'f'){
-                                                                            $arrayOrObjectValue = 'female';
-                                                                        }
-                                                                    }else{
-                                                                        echo $arrayOrObjectValue. '  ';
-                                                                    }
-                                        }
-                                        
+            <thead>
+                <?php foreach($users[0] AS $property=>$value)  {?>
+                <th><?=$property?></th>
+                <?php }  ?>
+            </thead>
+            <tbody>
+                <?php
+                            foreach($users AS $user){?>
+                <tr>
+                    <?php  foreach($user As $property => $value){?>
+                    <td>
+                        <?php if(gettype($value) == 'object' || gettype($value) == 'array'){
+                                foreach($value AS $keyOrProperty => $out){
+                                      if($property == 'gender' && $keyOrProperty == 'gender'){
+                                           if($out == 'm'){
+                                                  $out = 'male';
+                                                }elseif($out == 'f'){
+                                                      $out = 'female';
+                                                }
+                                            }
+                                                  echo  $out ;
+                                            }
+                                    }else{
+                                         echo $value ;
                                     }
-                                }?>
+                                      ?></td>
+                    <?php }?>
+                </tr>
+                <?php   }?>
+            </tbody>
+        </table>
 
-                        </td>
-
-                    </tr>
-                <?php }?>
-                
-            </table>
-           
-        <?php }?>
-
+        </table>
+    </div>
 
 
 </body>
